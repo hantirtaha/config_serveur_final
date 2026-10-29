@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Je maîtrise Git — guide simple</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Projet d’apprentissage · Taha</p>
+    <h1>En ce moment, j’utilise Git.</h1>
+    <p class="lead">
+      Une page unique pour comprendre Git, savoir pourquoi s’en servir,
+      préparer son environnement, puis enchaîner les bonnes commandes — sans se perdre.
+    </p>
+    <nav class="toc">
+      <a href="#quoi">C’est quoi</a>
+      <a href="#pourquoi">Pourquoi</a>
+      <a href="#avant">Avant de commencer</a>
+      <a href="#processus">Le processus</a>
+      <a href="#commandes">Commandes</a>
+      <a href="#bien">Bien l’utiliser</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="quoi">
+      <h2>C’est quoi Git&nbsp;?</h2>
+      <p>
+        Git est un <strong>outil de version</strong>. Il photographie l’état de tes fichiers
+        à chaque étape importante. Tu peux revenir en arrière, comparer deux versions,
+        et travailler à plusieurs sans écraser le travail des autres.
+      </p>
+      <p>
+        Ce n’est pas un site web. Git tourne sur ton ordinateur. GitHub, GitLab ou
+        Bitbucket sont seulement des <em>endroits</em> où stocker une copie distante du projet.
+      </p>
+      <ul class="cards">
+        <li>
+          <span>Dépôt</span>
+          Le dossier du projet, suivi par Git (souvent avec un dossier caché <code>.git</code>).
+        </li>
+        <li>
+          <span>Commit</span>
+          Une sauvegarde nommée : un message + un instantané des fichiers.
+        </li>
+        <li>
+          <span>Branche</span>
+          Une ligne de travail parallèle (ex. une fonctionnalité, un correctif).
+        </li>
+        <li>
+          <span>Remote</span>
+          La copie du projet sur un serveur (GitHub, etc.).
+        </li>
+      </ul>
+    </section>
+
+    <section id="pourquoi">
+      <h2>Pourquoi l’utiliser&nbsp;?</h2>
+      <ol class="reasons">
+        <li>
+          <strong>Ne plus perdre son travail.</strong>
+          Tu peux retrouver n’importe quelle version précédente.
+        </li>
+        <li>
+          <strong>Comprendre l’historique.</strong>
+          Chaque commit raconte ce qui a changé et pourquoi.
+        </li>
+        <li>
+          <strong>Collaborer sans chaos.</strong>
+          Chacun travaille sur sa branche, puis on fusionne.
+        </li>
+        <li>
+          <strong>Expérimenter sans peur.</strong>
+          Une idée foireuse se jette. Le code stable reste.
+        </li>
+        <li>
+          <strong>Publier proprement.</strong>
+          Un remote sert de sauvegarde et de point de partage.
+        </li>
+      </ol>
+    </section>
+
+    <section id="avant">
+      <h2>Avant d’utiliser Git</h2>
+      <p>Ne commence pas par <code>git commit</code>. Prépare le terrain.</p>
+      <ol class="steps">
+        <li>
+          <h3>1. Installer Git</h3>
+          <p>Windows : installe Git for Windows. macOS : Xcode Command Line Tools ou Homebrew. Linux : le paquet <code>git</code> de ta distro.</p>
+          <pre><code>git --version</code></pre>
+        </li>
+        <li>
+          <h3>2. Dire qui tu es</h3>
+          <p>Chaque commit porte un nom et un e-mail. Fais-le une fois sur la machine.</p>
+          <pre><code>git config --global user.name "Ton Nom"
+git config --global user.email "ton@email.com"</code></pre>
+        </li>
+        <li>
+          <h3>3. Choisir un éditeur et un dossier propre</h3>
+          <p>Travaille dans un dossier de projet dédié. Évite de versionner tout ton disque. Ajoute un fichier <code>.gitignore</code> pour exclure secrets, caches et fichiers générés.</p>
+        </li>
+        <li>
+          <h3>4. Initialiser (ou cloner)</h3>
+          <p>Projet nouveau : tu crées le dépôt. Projet existant : tu clones la copie distante.</p>
+          <pre><code>git init
+git clone https://exemple.com/projet.git</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section id="processus">
+      <h2>Le processus à suivre</h2>
+      <p>Le rythme quotidien, dans l’ordre. Ne saute pas d’étape.</p>
+      <ol class="flow">
+        <li><em>01</em> Modifier les fichiers dans l’éditeur</li>
+        <li><em>02</em> <code>git status</code> — voir ce qui a changé</li>
+        <li><em>03</em> <code>git add</code> — choisir ce qui entre dans le prochain commit</li>
+        <li><em>04</em> <code>git commit -m "message clair"</code> — figer l’instantané</li>
+        <li><em>05</em> <code>git push</code> — envoyer vers le remote (quand il existe)</li>
+        <li><em>06</em> <code>git pull</code> — récupérer le travail des autres avant de continuer</li>
+      </ol>
+      <p class="note">
+        Règle simple : un commit = une idée. Pas « tout ce que j’ai fait aujourd’hui ».
+      </p>
+    </section>
+
+    <section id="commandes">
+      <h2>Les commandes, vite</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Commande</th>
+            <th>À quoi ça sert</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>git status</code></td>
+            <td>Où tu en es : fichiers modifiés, indexés, non suivis.</td>
+          </tr>
+          <tr>
+            <td><code>git add fichier</code></td>
+            <td>Prépare un fichier pour le prochain commit. <code>git add .</code> prépare tout le dossier (à utiliser avec prudence).</td>
+          </tr>
+          <tr>
+            <td><code>git commit -m "…"</code></td>
+            <td>Enregistre l’instantané avec un message.</td>
+          </tr>
+          <tr>
+            <td><code>git log --oneline</code></td>
+            <td>Liste courte de l’historique.</td>
+          </tr>
+          <tr>
+            <td><code>git diff</code></td>
+            <td>Montre les changements pas encore indexés.</td>
+          </tr>
+          <tr>
+            <td><code>git branch</code></td>
+            <td>Liste les branches. <code>git branch nom</code> en crée une.</td>
+          </tr>
+          <tr>
+            <td><code>git switch nom</code></td>
+            <td>Change de branche (équivalent moderne de <code>checkout</code>).</td>
+          </tr>
+          <tr>
+            <td><code>git merge nom</code></td>
+            <td>Intègre une branche dans celle où tu te trouves.</td>
+          </tr>
+          <tr>
+            <td><code>git remote -v</code></td>
+            <td>Affiche les dépôts distants connus.</td>
+          </tr>
+          <tr>
+            <td><code>git push -u origin main</code></td>
+            <td>Envoie ta branche et mémorise le suivi distant.</td>
+          </tr>
+          <tr>
+            <td><code>git pull</code></td>
+            <td>Récupère et fusionne les commits distants.</td>
+          </tr>
+          <tr>
+            <td><code>git clone url</code></td>
+            <td>Copie un dépôt distant en local.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="bien">
+      <h2>L’utiliser correctement</h2>
+      <ul class="dos">
+        <li>Écris des messages au présent, précis : <code>Corrige le lien du menu</code>, pas <code>fix</code>.</li>
+        <li>Commit souvent, par petits paquets cohérents.</li>
+        <li>Ne commit jamais de mots de passe, clés API ou fichiers <code>.env</code>.</li>
+        <li>Travaille sur une branche pour une fonctionnalité, pas directement sur <code>main</code> dès que le projet grandit.</li>
+        <li>Fais un <code>git status</code> avant chaque commit et chaque push. C’est le réflexe le plus utile.</li>
+        <li>Lis <code>git diff</code> avant de committer : tu vois exactement ce que tu envoies.</li>
+        <li>En cas de doute, ne force pas (<code>--force</code>) sur une branche partagée.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Page unique · projet pour maîtriser Git · faite pour s’entraîner aux commits, branches et pushes.</p>
+  </footer>
+</body>
+</html>
